@@ -3,6 +3,7 @@ import requests
 import json
 import sys
 
+from dateutil.parser import parse
 from bs4 import BeautifulSoup
 
 SITE_URL = 'http://www.basingstoke.gov.uk/rte.aspx?id=1270'
@@ -111,7 +112,7 @@ def find_waste_information(bin_page):
     return {
         'schedule': waste_table.find_all('strong')[0].get_text(),
         'day_of_the_week': waste_table.find_all('strong')[1].get_text(),
-        'next_collections': [li.span.get_text()
+        'next_collections': [parse(li.span.get_text()).isoformat()
                              for li in waste_table.find_all('li')]
     }
 
@@ -128,7 +129,7 @@ def find_recycling_information(bin_page):
         'schedule': waste_table.find_all('strong')[1].get_text(),
         'week_colour': waste_table.find_all('strong')[0].get_text(),
         'day_of_the_week': waste_table.find_all('strong')[2].get_text(),
-        'next_collections': [li.span.get_text()
+        'next_collections': [parse(li.span.get_text()).isoformat()
                              for li in waste_table.find_all('li')]
     }
 
@@ -145,7 +146,7 @@ def find_green_information(bin_page):
         'schedule': waste_table.find_all('strong')[1].get_text(),
         'week_id': waste_table.find_all('strong')[0].get_text(),
         'day_of_the_week': waste_table.find_all('strong')[2].get_text(),
-        'next_collections': [li.span.get_text()
+        'next_collections': [parse(li.span.get_text()).isoformat()
                              for li in waste_table.find_all('li')]
     }
 
