@@ -1,0 +1,7 @@
+
+String BinDayJSON "Bin Day JSON" { exec="<[/home/robin/openhab-1.6/thehouse/binday.py:3600000:REGEX((.*?))]" }
+
+String BinWasteDay "Waste Day [%s]"
+String BinRecyclingDay "Recycling Day [%s]"
+
+
