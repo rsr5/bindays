@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Cache for 1 day
+CACHE_TIME=86400
+
+if [ -z "$2" ]; then
+	echo "Usage: $0 post_code house_number"
+	exit 1
+fi
+
+mkdir -p ~/.bindays
+
+cache_file=~/.bindays/`echo $1_$2 | tr -d " "`
+
+# See if cache file exists and is less than CACHE_TIME old
+if [ -f $cache_file ];then
+	modified=`date --reference $cache_file "+%s"`
+	now=`date +%s`
+	age=`expr $now - $modified`
+	if [ $age -lt $CACHE_TIME ]; then
+		cat $cache_file
+		exit 0
+	fi
+fi
+
+# Run actual script and write to stdout and cache file
+`dirname $0`/binday.py "$1" $2 | tee $cache_file
