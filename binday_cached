@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Simple caching script so OpenHAB can query more often. This probably isn't needed if you have persistence enabled for your Items
+
 # Cache for 1 day
 CACHE_TIME=86400
 

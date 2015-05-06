@@ -4,7 +4,7 @@
 
 Group Bin (All)
 
-String BinDayJSON "Bin Day JSON" { exec="<[/bin/sh@@-c@@/path/to/bindays/binday_cached 'PPPP PPP' HH:6000:REGEX((.*?))]" }
+String BinDayJSON "Bin Day JSON" { exec="<[/bin/sh@@-c@@/path/to/bindays/binday_cached 'PPPP PPP' HH:60000:REGEX((.*?))]" }
 
 DateTime BinWasteDay "Waste Day [%1$td/%1$tm/%1$tY]" (Bin)
 DateTime BinGreenDay "Green Waste Day [%1$td/%1$tm/%1$tY]"  (Bin)
