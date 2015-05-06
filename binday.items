@@ -1,7 +1,11 @@
+// Replace
+// - PPPP PPP with your postcode
+// - HH with your house number
 
-String BinDayJSON "Bin Day JSON" { exec="<[/home/robin/openhab-1.6/thehouse/binday.py:3600000:REGEX((.*?))]" }
+Group Bin (All)
 
-String BinWasteDay "Waste Day [%s]"
-String BinRecyclingDay "Recycling Day [%s]"
+String BinDayJSON "Bin Day JSON" { exec="<[/bin/sh@@-c@@/path/to/bindays/binday_cached 'PPPP PPP' HH:60000:REGEX((.*?))]" }
 
-
+DateTime BinWasteDay "Waste Day [%1$td/%1$tm/%1$tY]" (Bin)
+DateTime BinGreenDay "Green Waste Day [%1$td/%1$tm/%1$tY]"  (Bin)
+DateTime BinRecyclingDay "Recycling Day [%1$td/%1$tm/%1$tY]" (Bin)

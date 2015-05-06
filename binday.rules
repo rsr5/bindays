@@ -1,0 +1,16 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+
+rule "Parse Bin Day JSON"
+when
+  Item BinDayJSON received update
+then
+  var String json = BinDayJSON.state.toString
+  var String waste_day = transform("JSONPATH", "$.waste_info.next_collections[0]", json)
+  var String green_day = transform("JSONPATH", "$.green_waste.next_collections[0]", json)
+  var String recycling_day = transform("JSONPATH", "$.recycling.next_collections[0]", json)
+  postUpdate(BinWasteDay, waste_day);
+  postUpdate(BinGreenDay, green_day);
+  postUpdate(BinRecyclingDay, recycling_day);
+end
