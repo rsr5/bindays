@@ -41,11 +41,11 @@ def send_postcode(view_state, postcode):
     """
     form = {
         "__EVENTARGUMENT": "",
-        "__EVENTTARGET": "rteelem$ctl05$gapAddress$ctl03",
+        "__EVENTTARGET": "rteelem$ctl05$gapAddress$ctl02",
         "__EVENTVALIDATION": view_state['__EVENTVALIDATION'],
         "__VIEWSTATE": view_state['__VIEWSTATE'],
         "__VIEWSTATEGENERATOR": view_state['__VIEWSTATEGENERATOR'],
-        "rteelem$ctl05$gapAddress$ctl02": postcode,
+        "rteelem$ctl05$gapAddress$txtStage1_SearchValue": postcode,
         "rteelem$ctl05$hidLastVerticalPosition": 0
     }
     response = requests.post(SITE_URL, data=form)
@@ -73,11 +73,11 @@ def send_streetaddress(view_state, street_id):
     """
     form = {
         "__EVENTARGUMENT": "",
-        "__EVENTTARGET": "rteelem$ctl05$gapAddress$ctl07",
+        "__EVENTTARGET": "rteelem$ctl05$gapAddress$ctl05",
         "__EVENTVALIDATION": view_state['__EVENTVALIDATION'],
         "__VIEWSTATE": view_state['__VIEWSTATE'],
         "__VIEWSTATEGENERATOR": view_state['__VIEWSTATEGENERATOR'],
-        "rteelem$ctl05$gapAddress$ctl06": street_id,
+        "rteelem$ctl05$gapAddress$lstStage2_SearchResults": street_id,
         "rteelem$ctl05$hidLastVerticalPosition": 0
     }
     response = requests.post(SITE_URL, data=form)
