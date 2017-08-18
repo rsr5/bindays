@@ -7,14 +7,14 @@ import sys
 from dateutil.parser import parse
 from bs4 import BeautifulSoup
 
-SITE_URL = 'http://www.basingstoke.gov.uk/rte.aspx?id=1270'
+SITE_URL = 'https://www.basingstoke.gov.uk/rte.aspx?id=1270'
 
 
 def find_view_state(html_doc):
     """
     Given some HTML the viewstate fields are returned as a dictionary.
     """
-    soup = BeautifulSoup(html_doc)
+    soup = BeautifulSoup(html_doc, 'html.parser')
 
     vids = ['__VIEWSTATE', '__EVENTVALIDATION', '__VIEWSTATEGENERATOR',
             '__EVENTARGUMENT', '__EVENTTARGET']
@@ -56,7 +56,7 @@ def find_street_addresses(address_page):
     """
     Returns all the street address options and their corresponding identifyier.
     """
-    soup = BeautifulSoup(address_page)
+    soup = BeautifulSoup(address_page, 'html.parser')
 
     select = soup.find('select')
 
@@ -97,7 +97,7 @@ def find_address(bin_page):
     """
     Returns the full address for the waste query performed.
     """
-    soup = BeautifulSoup(bin_page)
+    soup = BeautifulSoup(bin_page, 'html.parser')
     address_span = soup.find('span', id='rteelem_ctl05_gapAddress')
     return address_span.find('textarea').get_text().lstrip()
 
@@ -106,7 +106,7 @@ def find_waste_information(bin_page):
     """
     Finds the information regarding land fill waste collections.
     """
-    soup = BeautifulSoup(bin_page)
+    soup = BeautifulSoup(bin_page, 'html.parser')
 
     waste_table = soup.find('h2', text='Waste collection dates').next_sibling
 
@@ -122,7 +122,7 @@ def find_recycling_information(bin_page):
     """
     Finds the information regarding recycling collections.
     """
-    soup = BeautifulSoup(bin_page)
+    soup = BeautifulSoup(bin_page, 'html.parser')
 
     waste_table = soup.find('h2', text='Recycling collection dates').next_sibling
 
@@ -139,7 +139,7 @@ def find_green_information(bin_page):
     """
     Finds the information regarding green collections.
     """
-    soup = BeautifulSoup(bin_page)
+    soup = BeautifulSoup(bin_page, 'html.parser')
 
     waste_table = soup.find('h2', text='Garden waste collection dates').next_sibling
 
